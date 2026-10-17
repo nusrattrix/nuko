@@ -1,0 +1,118 @@
+/* ------₊˚ ✧ ━━━━⊱⋆《 ♡ Sleeping Nuko Cat ♧ 》⊰━━━━ ✧ ₊˚------ */
+
+#nuko {
+    pointer-events: all !important;
+    cursor: grab;
+
+    &:active {
+        cursor: grabbing;
+        background-position: -96px 0 !important; 
+    }
+}
+
+[class^="channelTextArea"] {
+    --wakeup-duration: 0.8s;
+    --sleep-duration: 1.2s; 
+    --typing-duration: 0.8s; 
+    --typing-animation: spinninR;
+    
+    --nuko-skin: url("https://cdn.jsdelivr.net/gh/nusrattrix/nuko@main/nuko.gif"); 
+}
+
+[class^="channelTextArea"]::after {
+    content: "";
+    width: 32px;
+    height: 32px;
+    bottom: calc(100% - 3px);
+    right: 10px;
+    position: absolute;
+    image-rendering: pixelated;
+    pointer-events: auto;
+    cursor: grab;
+    background-image: var(--nuko-skin);
+    z-index: 1;
+    
+    /* Default state: go to sleep */
+    animation: var(--wakeup-duration) 1 forwards gotosleep,
+        var(--sleep-duration) var(--wakeup-duration) infinite sleep;
+}
+
+/* Hovering: the cat wakes up (blushex) */
+[class^="channelTextArea"]:hover::after {
+    animation: var(--wakeup-duration) infinite wakeup;
+}
+
+/* Grabbing/Clicking: pet the cat */
+[class^="channelTextArea"]:active::after {
+    cursor: grabbing;
+    animation: none;
+    background-position: -96px 0; 
+}
+
+/* Typing: the cat starts spinning (spin) */
+[class^="channelTextArea"]:has([class*="editor_"]:focus):not(:has([class*="placeholder_"]))::after {
+    animation: var(--typing-duration) infinite spinninR;
+}
+
+/* Required Keyframes */
+
+/* ZZZ - 15 Frames (Row 5 & 6) */
+@keyframes sleep {
+    0%, 6.66% { background-position: -32px -128px; }
+    6.67%, 13.33% { background-position: -64px -128px; }
+    13.34%, 20% { background-position: -96px -128px; }
+    20.01%, 26.66% { background-position: -128px -128px; }
+    26.67%, 33.33% { background-position: -160px -128px; }
+    33.34%, 40% { background-position: -192px -128px; }
+    40.01%, 46.66% { background-position: -224px -128px; }
+    46.67%, 53.33% { background-position: 0px -160px; }
+    53.34%, 60% { background-position: -32px -160px; }
+    60.01%, 66.66% { background-position: -64px -160px; }
+    66.67%, 73.33% { background-position: -96px -160px; }
+    73.34%, 80% { background-position: -128px -160px; }
+    80.01%, 86.66% { background-position: -160px -160px; }
+    86.67%, 93.33% { background-position: -192px -160px; }
+    93.34%, 100% { background-position: -224px -160px; }
+}
+
+/* Blushex - 14 Frames (Row 1 & 2) */
+@keyframes wakeup {
+    0%, 7.14% { background-position: 0px 0px; }
+    7.15%, 14.28% { background-position: -32px 0px; }
+    14.29%, 21.42% { background-position: -64px 0px; }
+    21.43%, 28.57% { background-position: -96px 0px; }
+    28.58%, 35.71% { background-position: -128px 0px; }
+    35.72%, 42.85% { background-position: -160px 0px; }
+    42.86%, 50% { background-position: -192px 0px; }
+    50.01%, 57.14% { background-position: -224px 0px; }
+    57.15%, 64.28% { background-position: 0px -32px; }
+    64.29%, 71.42% { background-position: -32px -32px; }
+    71.43%, 78.57% { background-position: -64px -32px; }
+    78.58%, 85.71% { background-position: -96px -32px; }
+    85.72%, 92.85% { background-position: -128px -32px; }
+    92.86%, 100% { background-position: -160px -32px; }
+}
+
+/* Spin - 15 Frames (Row 2, 3 & 4) */
+@keyframes spinninR {
+    0%, 6.66% { background-position: -192px -32px; }
+    6.67%, 13.33% { background-position: -224px -32px; }
+    13.34%, 20% { background-position: 0px -64px; }
+    20.01%, 26.66% { background-position: -32px -64px; }
+    26.67%, 33.33% { background-position: -64px -64px; }
+    33.34%, 40% { background-position: -96px -64px; }
+    40.01%, 46.66% { background-position: -128px -64px; }
+    46.67%, 53.33% { background-position: -160px -64px; }
+    53.34%, 60% { background-position: -192px -64px; }
+    60.01%, 66.66% { background-position: -224px -64px; }
+    66.67%, 73.33% { background-position: 0px -96px; }
+    73.34%, 80% { background-position: -32px -96px; }
+    80.01%, 86.66% { background-position: -64px -96px; }
+    86.67%, 93.33% { background-position: -96px -96px; }
+    93.34%, 100% { background-position: -128px -96px; }
+}
+
+/* Transition state (Snaps to first frame of ZZZ) */
+@keyframes gotosleep {
+    0%, 100% { background-position: -32px -128px; }
+}
