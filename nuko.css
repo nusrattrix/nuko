@@ -1,100 +1,56 @@
 /* ------₊˚ ✧ ━━━━⊱⋆《 ♡ Sleeping Nuko Cat ♧ 》⊰━━━━ ✧ ₊˚------ */
+/* By: nusrattrix - <@!1033308671096147999> - Inspired By: Adryd325's Oneko Cat*/
 
 #nuko {
-    pointer-events: all !important;
-    cursor: grab;
-
-    &:active {
-        cursor: grabbing;
-        background-position: -96px 0 !important; 
-    }
+    position: absolute !important;
+    width: 32px !important;
+    height: 32px !important;
+    bottom: calc(100% - 3px) !important;
+    right: 10px !important;
+    background-image: url("https://raw.githubusercontent.com/nusrattrix/nuko/main/nuko.gif?v=2") !important;
+    background-size: 256px 192px !important;
+    image-rendering: pixelated !important;
+    pointer-events: auto !important;
+    cursor: grab !important;
+    z-index: 50 !important;
 }
 
-[class^="channelTextArea"] {
-    --wakeup-duration: 0.8s;
-    --sleep-duration: 1.2s; 
-    --typing-duration: 0.8s; 
-    --typing-animation: spinninR;
-    
-    --nuko-skin: url("https://cdn.jsdelivr.net/gh/nusrattrix/nuko@main/nuko.gif"); 
-}
+#nuko.sleeping { animation: sleep 2.5s steps(1, end) infinite; }   /* Default */
+#nuko.awake    { animation: wakeup 1.2s steps(1, end) forwards; }  /* Hover   */
+#nuko.blushing { animation: blushex 0.7s steps(1, end) forwards; } /* Click   */
+#nuko.typing   { animation: spin 1.2s steps(1, end) infinite; }    /* Type    */
 
-[class^="channelTextArea"]::after {
-    content: "";
-    width: 32px;
-    height: 32px;
-    bottom: calc(100% - 3px);
-    right: 10px;
-    position: absolute;
-    image-rendering: pixelated;
-    pointer-events: auto;
-    cursor: grab;
-    background-image: var(--nuko-skin);
-    z-index: 1;
-    
-    /* Default state: go to sleep */
-    animation: var(--wakeup-duration) 1 forwards gotosleep,
-        var(--sleep-duration) var(--wakeup-duration) infinite sleep;
-}
+/* --- Keyframes --- */
 
-/* Hovering: the cat wakes up (blushex) */
-[class^="channelTextArea"]:hover::after {
-    animation: var(--wakeup-duration) infinite wakeup;
-}
-
-/* Grabbing/Clicking: pet the cat */
-[class^="channelTextArea"]:active::after {
-    cursor: grabbing;
-    animation: none;
-    background-position: -96px 0; 
-}
-
-/* Typing: the cat starts spinning (spin) */
-[class^="channelTextArea"]:has([class*="editor_"]:focus):not(:has([class*="placeholder_"]))::after {
-    animation: var(--typing-duration) infinite spinninR;
-}
-
-/* Required Keyframes */
-
-/* ZZZ - 15 Frames (Row 5 & 6) */
 @keyframes sleep {
-    0%, 6.66% { background-position: -32px -128px; }
-    6.67%, 13.33% { background-position: -64px -128px; }
-    13.34%, 20% { background-position: -96px -128px; }
-    20.01%, 26.66% { background-position: -128px -128px; }
-    26.67%, 33.33% { background-position: -160px -128px; }
-    33.34%, 40% { background-position: -192px -128px; }
-    40.01%, 46.66% { background-position: -224px -128px; }
-    46.67%, 53.33% { background-position: 0px -160px; }
-    53.34%, 60% { background-position: -32px -160px; }
-    60.01%, 66.66% { background-position: -64px -160px; }
-    66.67%, 73.33% { background-position: -96px -160px; }
-    73.34%, 80% { background-position: -128px -160px; }
-    80.01%, 86.66% { background-position: -160px -160px; }
-    86.67%, 93.33% { background-position: -192px -160px; }
-    93.34%, 100% { background-position: -224px -160px; }
+    0%, 7.68% { background-position: -32px -128px; }
+    7.69%, 15.38% { background-position: -64px -128px; }
+    15.39%, 23.08% { background-position: -96px -128px; }
+    23.09%, 30.77% { background-position: -128px -128px; }
+    30.78%, 38.46% { background-position: -160px -128px; }
+    38.47%, 46.15% { background-position: -192px -128px; }
+    46.16%, 53.84% { background-position: -224px -128px; }
+    53.85%, 61.53% { background-position: 0px -160px; }
+    61.54%, 69.23% { background-position: -32px -160px; }
+    69.24%, 76.92% { background-position: -64px -160px; }
+    76.93%, 84.61% { background-position: -96px -160px; }
+    84.62%, 92.30% { background-position: -128px -160px; }
+    92.31%, 100% { background-position: -160px -160px; }
 }
-
-/* Blushex - 14 Frames (Row 1 & 2) */
 @keyframes wakeup {
-    0%, 7.14% { background-position: 0px 0px; }
-    7.15%, 14.28% { background-position: -32px 0px; }
-    14.29%, 21.42% { background-position: -64px 0px; }
-    21.43%, 28.57% { background-position: -96px 0px; }
-    28.58%, 35.71% { background-position: -128px 0px; }
-    35.72%, 42.85% { background-position: -160px 0px; }
-    42.86%, 50% { background-position: -192px 0px; }
-    50.01%, 57.14% { background-position: -224px 0px; }
-    57.15%, 64.28% { background-position: 0px -32px; }
-    64.29%, 71.42% { background-position: -32px -32px; }
-    71.43%, 78.57% { background-position: -64px -32px; }
-    78.58%, 85.71% { background-position: -96px -32px; }
-    85.72%, 92.85% { background-position: -128px -32px; }
-    92.86%, 100% { background-position: -160px -32px; }
+    0%, 20% { background-position: -192px -160px; }     /* Blink Open   */
+    20.01%, 40% { background-position: -224px -160px; } /* Blink Closed */
+    40.01%, 60% { background-position: -192px -160px; } /* Blink Open   */
+    60.01%, 100% { background-position: -192px -32px; } /* Stand        */
 }
-
-/* Spin - 15 Frames (Row 2, 3 & 4) */
-@keyframes spinninR {
+@keyframes blushex {
+    0%, 20% { background-position: -64px 0px; }         /* Col 3, Row 1 */
+    20.01%, 40% { background-position: -128px 0px; }    /* Col 5, Row 1 */
+    40.01%, 60% { background-position: -32px -32px; }   /* Col 2, Row 2 */
+    60.01%, 80% { background-position: -160px -32px; }  /* Col 6, Row 2 */
+    80.01%, 100% { background-position: -192px -32px; } /* Col 7, Row 2 (Stand) */
+}
+@keyframes spin {
     0%, 6.66% { background-position: -192px -32px; }
     6.67%, 13.33% { background-position: -224px -32px; }
     13.34%, 20% { background-position: 0px -64px; }
@@ -110,9 +66,4 @@
     80.01%, 86.66% { background-position: -64px -96px; }
     86.67%, 93.33% { background-position: -96px -96px; }
     93.34%, 100% { background-position: -128px -96px; }
-}
-
-/* Transition state (Snaps to first frame of ZZZ) */
-@keyframes gotosleep {
-    0%, 100% { background-position: -32px -128px; }
 }
